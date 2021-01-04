@@ -1,0 +1,29 @@
+LC 102题
+
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ret = new ArrayList<List<Integer>>() ;
+        Queue<TreeNode> queue = new LinkedList<>() ; //初始化队列
+        if(root == null){       //如果树空，返回空
+            return ret ;
+        }
+        queue.offer(root) ;
+        while( !queue.isEmpty()){  //队列不为空
+            List<Integer> list = new ArrayList<Integer>() ;
+            int currentSize = queue.size() ;  //返回队列元素个数
+            for (int i = 0 ; i < currentSize ; i ++){
+                TreeNode p = queue.poll() ;//队头元素出队并删除队头元素
+                list.add(p.val) ;
+                if(p.left != null){     //有左子树，则入队
+                    queue.offer(p.left) ;
+                }
+                if(p.right !=null){     //有右子树，入队
+                    queue.offer(p.right) ;
+                }
+            }
+            ret.add(list);
+        }
+
+        return ret ;
+    }
+}
